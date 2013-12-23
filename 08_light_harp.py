@@ -1,6 +1,5 @@
 # 08_light_harp.py
 
-from Tkinter import *
 import RPi.GPIO as GPIO
 import time, math
 
