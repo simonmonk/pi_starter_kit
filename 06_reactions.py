@@ -39,7 +39,6 @@ def key_pressed():
 while True:
     off()
     print("Press the button for red or green when one lights")
-    raw_input("Hit RETURN when ready")
     delay = random.randint(3, 7)
     color = random.randint(1, 2)
     time.sleep(delay)

@@ -30,7 +30,7 @@ def analog_read():
     return charge_time()
 
 def read_resistance():
-    n = 100
+    n = 20
     total = 0;
     for i in range(1, n):
         total = total + analog_read()
@@ -39,7 +39,7 @@ def read_resistance():
     return resistance
 
 def light_from_r(R):
-    return math.log(R) * 100.0
+    return math.log(1000000.0/R) * 10.0 
 
 class App:
 
@@ -55,9 +55,9 @@ class App:
 
     def update_reading(self):
         light = light_from_r(read_resistance())
-        reading_str = "{:.0f}".format(temp_c)
+        reading_str = "{:.0f}".format(light)
         self.reading_label.configure(text=reading_str)
-        self.master.after(500, self.update_reading)
+        self.master.after(200, self.update_reading)
 
 
 root = Tk()
