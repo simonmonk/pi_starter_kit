@@ -7,9 +7,13 @@ GPIO.setmode(GPIO.BCM)
 red_pin = 18
 
 GPIO.setup(red_pin, GPIO.OUT)
-        
-while True:
-    GPIO.output(red_pin, True)
-    time.sleep(0.5)
-    GPIO.output(red_pin, False)
-    time.sleep(0.5)
+
+try:         
+    while True:
+        GPIO.output(red_pin, True)
+        time.sleep(0.5)
+        GPIO.output(red_pin, False)
+        time.sleep(0.5)
+finally:  
+    print("Cleaning up")
+    GPIO.cleanup()

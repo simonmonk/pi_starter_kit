@@ -35,23 +35,26 @@ def key_pressed():
         return 1
     if GPIO.input(red_switch_pin) and not GPIO.input(green_switch_pin):
         return 2
-        
-while True:
-    off()
-    print("Press the button for red or green when one lights")
-    delay = random.randint(3, 7)
-    color = random.randint(1, 2)
-    time.sleep(delay)
-    if (color == 2):
-        red()
-    else:
-        green()
-    t1 = time.time()
-    
-    while not key_pressed():
-        pass
-    t2 = time.time()
-    if key_pressed() != color :
-        print("WRONG BUTTON")
-    else:
-        print("Time: " + str(int((t2 - t1) * 1000)) + " milliseconds")
+
+try:        
+    while True:
+        off()
+        print("Press the button for red or green when one lights")
+        delay = random.randint(3, 7)
+        color = random.randint(1, 2)
+        time.sleep(delay)
+        if (color == 2):
+            red()
+        else:
+            green()
+        t1 = time.time()
+        while not key_pressed():
+            pass
+        t2 = time.time()
+        if key_pressed() != color :
+            print("WRONG BUTTON")
+        else:
+            print("Time: " + str(int((t2 - t1) * 1000)) + " milliseconds")
+finally:  
+    print("Cleaning up")
+    GPIO.cleanup()

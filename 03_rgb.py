@@ -19,7 +19,7 @@ pwmBlue = GPIO.PWM(24, 500)
 pwmBlue.start(100)
 
 class App:
-	
+    
     def __init__(self, master):
         frame = Frame(master)
         frame.pack()
@@ -42,7 +42,7 @@ class App:
 
     def updateGreen(self, duty):
         pwmGreen.ChangeDutyCycle(float(duty))
-	
+    
     def updateBlue(self, duty):
         pwmBlue.ChangeDutyCycle(float(duty))
 

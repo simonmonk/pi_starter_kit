@@ -35,13 +35,18 @@ def calibrate():
         reading = step()
         if reading > maximum:
             maximum = reading
-    threshold = maximum
+    threshold = maximum * 1.15
     print(threshold)
     print("Calibration Complete")
     
     
 calibrate()
 
-while True:
-    reading = step()
-    GPIO.output(led_pin, (reading > threshold))
+try:
+    while True:
+        reading = step()
+        GPIO.output(led_pin, (reading > threshold))
+
+finally:  
+    print("Cleaning up")
+    GPIO.cleanup()

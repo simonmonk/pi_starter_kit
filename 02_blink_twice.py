@@ -10,10 +10,14 @@ red_pin2 = 23
 GPIO.setup(red_pin1, GPIO.OUT)
 GPIO.setup(red_pin2, GPIO.OUT)
         
-while True:
-    GPIO.output(red_pin1, True)
-    GPIO.output(red_pin2, False)
-    time.sleep(0.5)
-    GPIO.output(red_pin1, False)
-    GPIO.output(red_pin2, True)
-    time.sleep(0.5)
+try:
+    while True:
+        GPIO.output(red_pin1, True)
+        GPIO.output(red_pin2, False)
+        time.sleep(0.5)
+        GPIO.output(red_pin1, False)
+        GPIO.output(red_pin2, True)
+        time.sleep(0.5)
+finally:  
+    print("Cleaning up")
+    GPIO.cleanup()

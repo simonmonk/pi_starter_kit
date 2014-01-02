@@ -34,5 +34,10 @@ def analog_read():
     GPIO.output(buzzer_pin, False)
     charge_time()
 
-while True:
-    analog_read()
+try:
+    while True:
+        analog_read()
+
+finally:  
+    print("Cleaning up")
+    GPIO.cleanup()
