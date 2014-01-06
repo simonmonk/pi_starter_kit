@@ -41,8 +41,8 @@ def read_resistance():
     for i in range(1, n):
         total = total + analog_read()
     reading = total / float(n)
-    T = (1/inv_T - t0) * fiddle_factor
-    return T * 9.0 / 5.0 + 32.0
+    resistance = reading * 6.05 - 939
+    return resistance
 
 
 def temp_from_r(R):
@@ -51,18 +51,18 @@ def temp_from_r(R):
     t0 = 273.15
     t25 = t0 + 25.0
     inv_T = 1/t25 + 1/B * math.log(R/R0)
-    T = 1/inv_T - t0
-    return T * fiddle_factor
+    T = (1/inv_T - t0) * fiddle_factor
+    return T * 9.0 / 5.0 + 32.0
 
 def buzz(pitch, duration):
-	period = 1.0 / pitch
-	delay = period / 2
-	cycles = int(duration * pitch)
-	for i in range(cycles):
-		GPIO.output(buzzer_pin, True)
-		time.sleep(delay)
-		GPIO.output(buzzer_pin, False)
-		time.sleep(delay)
+    period = 1.0 / pitch
+    delay = period / 2
+    cycles = int(duration * pitch)
+    for i in range(cycles):
+        GPIO.output(buzzer_pin, True)
+        time.sleep(delay)
+        GPIO.output(buzzer_pin, False)
+        time.sleep(delay)
 
 class App:
 
