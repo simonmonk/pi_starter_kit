@@ -35,7 +35,7 @@ def analog_read():
     discharge()
     return charge_time()
 
-def read_resistance():
+def read_resistance(): 
     n = 100
     total = 0;
     for i in range(1, n):
