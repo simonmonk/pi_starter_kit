@@ -1,4 +1,4 @@
-# 10_email_notifier.py
+# 06_reactions.py
 
 import RPi.GPIO as GPIO
 import time, random
