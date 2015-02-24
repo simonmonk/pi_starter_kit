@@ -1,4 +1,4 @@
-# 04_thermomether.py
+# 04_thermomether_f.py
 
 from Tkinter import *
 import RPi.GPIO as GPIO
