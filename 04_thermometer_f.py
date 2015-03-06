@@ -78,7 +78,7 @@ def temp_from_r(R):
     R0 = 1000.0     # The resistance of the thermistor at 25C -change for different thermistor
     t0 = 273.15     # 0 deg C in K
     t25 = t0 + 25.0 # 25 deg C in K
-    # Steinhart–Hart equation - see http://en.wikipedia.org/wiki/Thermistor
+    # Steinhart-Hart equation - Google it
     inv_T = 1/t25 + 1/B * math.log(R/R0)
     T = (1/inv_T - t0) * fiddle_factor
     return T * 9.0 / 5.0 + 32.0 # convert C to F
