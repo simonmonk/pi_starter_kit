@@ -1,5 +1,6 @@
 # 03_rgb.py
 # From the code for the Electronics Starter Kit for the Raspberry Pi by MonkMakes.com
+# Based on Recipe 9.9 in The Raspberry Pi Cookbook by Simon Monk.
 
 from Tkinter import *       # tkinter provides the graphical user interface (GUI)
 import RPi.GPIO as GPIO
