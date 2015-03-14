@@ -16,7 +16,7 @@ try:
     while True:
         GPIO.output(red_pin1, True)     # True means that LED turns on
         GPIO.output(red_pin2, False)    # False means that LED turns off
-        time.sleep(0.5                  # delay 0.5 seconds
+        time.sleep(0.5)                 # delay 0.5 seconds
         GPIO.output(red_pin1, False)
         GPIO.output(red_pin2, True)
         time.sleep(0.5)
