@@ -68,4 +68,8 @@ root = Tk()
 root.wm_title('RGB LED Control')
 app = App(root)
 root.geometry("200x150+0+0")
-root.mainloop()
+try:
+    root.mainloop()
+finally:  
+    print("Cleaning up")
+    GPIO.cleanup()

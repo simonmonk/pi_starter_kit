@@ -110,4 +110,8 @@ root = Tk()
 root.wm_title('Thermometer')
 app = App(root)
 root.geometry("400x300+0+0")
-root.mainloop()
+try:
+    root.mainloop()
+finally:  
+    print("Cleaning up")
+    GPIO.cleanup()
