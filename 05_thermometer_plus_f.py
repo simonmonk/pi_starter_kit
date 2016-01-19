@@ -79,7 +79,7 @@ def analog_read():
     return t
 
 # Convert the time taken to charge the cpacitor into a value of resistance
-# To reduce errors, do it 100 times and take the average.
+# To reduce errors, do it lots of times and take the average.
 def read_resistance():
     n = 10
     total = 0;
