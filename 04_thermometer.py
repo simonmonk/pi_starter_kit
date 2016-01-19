@@ -66,7 +66,7 @@ def analog_read():
 def read_resistance():
     n = 10
     total = 0;
-    for i in range(1, n):
+    for i in range(0, n):
         total = total + analog_read()
     t = total / float(n)
     T = t * 0.632 * 3.3

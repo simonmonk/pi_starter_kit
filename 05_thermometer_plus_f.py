@@ -50,7 +50,6 @@ set_temp = 25           # The temperature above which the buzzer will sound
 # To be honest, its never going to be very accurate, as an absolute thermometer,
 # but the value of temp should increase when you hold the thermistor between you fingers to
 # warm it up.
-fiddle_factor = 0.9;
 
 # empty the capacitor ready to start filling it up
 def discharge():
@@ -83,7 +82,7 @@ def analog_read():
 def read_resistance():
     n = 10
     total = 0;
-    for i in range(1, n):
+    for i in range(0, n):
         total = total + analog_read()
     t = total / float(n)
     T = t * 0.632 * 3.3
