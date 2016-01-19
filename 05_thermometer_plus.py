@@ -5,6 +5,13 @@ from Tkinter import *           # tkinter provides the graphical user interface 
 import RPi.GPIO as GPIO
 import time, math
 
+
+C = 0.38 # uF - Tweek this value around 0.33 to improve accuracy
+R1 = 1000 # Ohms
+B = 3800.0 # The thermistor constant - change this for a different thermistor
+R0 = 1000.0 # The resistance of the thermistor at 25C -change for different thermistor
+
+
 # Configure the Pi to use the BCM (Broadcom) pin names, rather than the pin positions
 GPIO.setmode(GPIO.BCM)
 
@@ -62,37 +69,37 @@ def charge_time():
     while not GPIO.input(b_pin):
         pass
     t2 = time.time()
-    return (t2 - t1) * 1000000
+    return (t2 - t1) * 1000000 # microseconds
 
 # Take an analog readin as the time taken to charge after first discharging the capacitor
 def analog_read():
     discharge()
-    return charge_time()
+    t = charge_time()
+    discharge()
+    return t
 
 # Convert the time taken to charge the cpacitor into a value of resistance
 # To reduce errors, do it 100 times and take the average.
 def read_resistance():
-    n = 100
+    n = 10
     total = 0;
     for i in range(1, n):
         total = total + analog_read()
-    reading = total / float(n)
-    # 6.05 was measured as the factor needed to convert reading to resistance (its linear)
-    # with the sensor replaced by short circuit (i.e. using the timing for the 1k fixed resistor only)
-    # 939 is the measured resistance of my supposed 1k resistor
-    resistance = reading * 6.05 - 939
-    return resistance
+    t = total / float(n)
+    T = t * 0.632 * 3.3
+    r = (T / C) - R1
+    return r
 
 
-def temp_from_r(R):
-    B = 3800.0          # The thermistor constant - change this for a different thermistor
-    R0 = 1000.0         # The resistance of the thermistor at 25C -change for different thermistor
-    t0 = 273.15         # 0 deg C in K
-    t25 = t0 + 25.0     # 25 deg C in K
+
+def read_temp_c():
+    R = read_resistance()
+    t0 = 273.15     # 0 deg C in K
+    t25 = t0 + 25.0 # 25 deg C in K
     # Steinhart-Hart equation - Google it
     inv_T = 1/t25 + 1/B * math.log(R/R0)
-    T = 1/inv_T - t0
-    return T * fiddle_factor
+    T = (1/inv_T - t0)
+    return T
 
 # sound the buzzer at a certain pitch (in Hz) for a duration in seconds
 def buzz(pitch, duration):
@@ -121,7 +128,7 @@ class App:
 
     # Update the temperature reading
     def update_reading(self):
-        temp_c = temp_from_r(read_resistance())
+        temp_c = read_temp_c()
         if temp_c > set_temp:
             buzz(500, 0.3)
         reading_str = "{:.2f}".format(temp_c)
